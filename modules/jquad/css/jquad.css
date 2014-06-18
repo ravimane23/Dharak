@@ -1,0 +1,32 @@
+#jquad {
+  overflow: hidden;
+}
+#jquad input.form-text {
+  width: 99%;
+}
+
+#jquad .jquad-messages {
+  padding: 0 0.7em;
+}
+
+#jquad .jquad-messages ul {
+  margin: 0;
+}
+
+#jquad .jquad-messages li {
+  background: none;
+  position: relative;
+  padding: 0.5em 0 0.5em 1.5em;
+  margin: 0;
+  padding
+}
+
+#jquad .jquad-messages li a {
+  font-weight: bold;
+}
+
+#jquad .jquad-messages .ui-icon {
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+}

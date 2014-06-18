@@ -1,0 +1,11 @@
+drwxr-xr-x   5 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x  56 ar114466 psacln       4096 Nov 30  2011 ..
+-rw-r--r--   1 ar114466 psacln      14940 Sep 20  2011 LICENSE.txt
+-rw-r--r--   1 ar114466 psacln       3018 Sep 20  2011 README.txt
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 css
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 includes
+-rw-r--r--   1 ar114466 psacln        417 Sep 20  2011 jquad.info
+-rw-r--r--   1 ar114466 psacln        505 Sep 20  2011 jquad.install
+-rw-r--r--   1 ar114466 psacln       4522 Sep 20  2011 jquad.module
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 js
+-rw-r--r--   1 ar114466 psacln       9427 Sep 20  2011 throbber.gif

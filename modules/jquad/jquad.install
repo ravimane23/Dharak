@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function jquad_install() {
+  db_query("UPDATE {system} SET weight = 1 WHERE name = 'jquad'");
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function jquad_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'jquad_%'");
+}
+
+/**
+ * Update module weight in Drupal so it runs after most modules and can validate properly
+ */
+function jquad_update_6100() {
+  return array(update_sql("UPDATE {system} SET weight = 1 WHERE name = 'jquad'"));
+}

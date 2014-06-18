@@ -1,0 +1,55 @@
+<?php
+// $Id: feedbacktab.module,v 1.1 2009/04/20 12:05:18 bevan Exp $
+
+/**
+ * @file
+ *  Creates a tab by the scrollbar for feedback and suggestions.
+ */
+
+/**
+ * Implementation of hook_theme_registry_alter().
+ */
+function feedbacktab_theme_registry_alter(&$theme_registry) {
+  // Make the array of the page hook's preprocess functions easier to
+  // get to.
+  $funcs = &$theme_registry['page']['preprocess functions'];
+
+  // Move 'feedbacktab_preprocess_page' to be the first callback
+  // function.
+  $key = array_search('feedbacktab_preprocess_page', $funcs);
+  unset($funcs[$key]);
+  array_unshift($funcs, 'feedbacktab_preprocess_page');
+}
+
+/**
+ * Preprocess function for the page theme hook.
+ *
+ * This function doesn't use the arguments, and doesn't return
+ * anything.  It adds JS and CSS to the page.  It must do this before
+ * the page hook's other preprocess functions, so that the JS and CSS
+ * is added before they render $styles, $script and $closure.
+ */
+function feedbacktab_preprocess_page($content, $show_blocks, $show_messages = TRUE) {
+  // @todo Make these settings extensible and configurable with an
+  // admin/settings/feedbacktab UI.
+  $settings = array('iframeUri' => variable_get('feedbacktab_iframe_uri', FALSE));
+  drupal_add_js(array('feedbacktab' => $settings), 'setting', 'footer');
+
+  $path = drupal_get_path('module', 'feedbacktab') . '/assets';
+
+  // Source jQuery UI libraries.
+  // drupal_add_js("$path/ui/ui.core.js");
+  // drupal_add_js("$path/ui/ui.dialog.js");
+  // drupal_add_js("$path/ui/effects.core.js");
+  // drupal_add_js("$path/ui/effects.bounce.js");
+
+  // Concatenated and minified jQuery UI libraries.
+  drupal_add_js("$path/jquery-ui-1.6.custom.min.js", 'module', 'footer', TRUE);
+
+  // The jQuery UI theme – 'Smoothness'.
+  drupal_add_css("$path/ui.all.css");
+
+  // This module's own stuff.
+  drupal_add_js("$path/feedbacktab.js", 'module', 'footer', TRUE);
+  drupal_add_css("$path/feedbacktab.css");
+}

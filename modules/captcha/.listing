@@ -1,0 +1,14 @@
+drwxr-xr-x   4 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x  56 ar114466 psacln       4096 Nov 30  2011 ..
+-rw-r--r--   1 ar114466 psacln      14940 Sep 20  2011 LICENSE.txt
+-rw-r--r--   1 ar114466 psacln       1260 Sep 20  2011 README.txt
+-rw-r--r--   1 ar114466 psacln      22236 Sep 20  2011 captcha.admin.inc
+-rw-r--r--   1 ar114466 psacln      14980 Sep 20  2011 captcha.inc
+-rw-r--r--   1 ar114466 psacln        346 Sep 20  2011 captcha.info
+-rw-r--r--   1 ar114466 psacln       9696 Sep 20  2011 captcha.install
+-rwxrwxrwx   1 ar114466 psacln       1317 Sep 20  2011 captcha.js
+-rw-r--r--   1 ar114466 psacln      31601 Sep 20  2011 captcha.module
+-rw-r--r--   1 ar114466 psacln      44010 Sep 20  2011 captcha.test
+-rw-r--r--   1 ar114466 psacln       5421 Sep 20  2011 captcha_api.txt
+drwxrwxrwx   3 ar114466 psacln       4096 Sep 20  2011 image_captcha
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 translations

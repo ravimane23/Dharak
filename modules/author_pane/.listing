@@ -1,0 +1,13 @@
+drwxr-xr-x   5 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x  56 ar114466 psacln       4096 Nov 30  2011 ..
+-rw-r--r--   1 ar114466 psacln       8668 Sep 20  2011 CHANGELOG.txt
+-rw-r--r--   1 ar114466 psacln      14940 Sep 20  2011 LICENSE.txt
+-rw-r--r--   1 ar114466 psacln       4548 Sep 20  2011 README.txt
+-rw-r--r--   1 ar114466 psacln        952 Sep 20  2011 author-pane-user-picture.tpl.php
+-rw-r--r--   1 ar114466 psacln       7297 Sep 20  2011 author-pane.tpl.php
+-rw-r--r--   1 ar114466 psacln       1320 Sep 20  2011 author_pane.css
+-rw-r--r--   1 ar114466 psacln        288 Sep 20  2011 author_pane.info
+-rw-r--r--   1 ar114466 psacln      12243 Sep 20  2011 author_pane.module
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 images
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 modules
+drwxr-xr-x   3 ar114466 psacln       4096 Sep 20  2011 plugins

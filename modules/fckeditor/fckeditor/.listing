@@ -1,0 +1,12 @@
+drwxr-xr-x   3 ar114466 psacln       4096 Nov  3  2011 .
+drwxr-xr-x   5 ar114466 psacln       4096 Nov  3  2011 ..
+drwxr-xr-x  12 ar114466 psacln       4096 Nov  3  2011 editor
+-rw-r--r--   1 ar114466 psacln      13602 Nov  3  2011 fckconfig.js
+-rw-r--r--   1 ar114466 psacln       9278 Nov  3  2011 fckeditor.js
+-rw-r--r--   1 ar114466 psacln        963 Nov  3  2011 fckeditor.php
+-rw-r--r--   1 ar114466 psacln       5920 Nov  3  2011 fckeditor_php4.php
+-rw-r--r--   1 ar114466 psacln       5899 Nov  3  2011 fckeditor_php5.php
+-rw-r--r--   1 ar114466 psacln      12939 Nov  3  2011 fckpackager.xml
+-rw-r--r--   1 ar114466 psacln       3339 Nov  3  2011 fckstyles.xml
+-rw-r--r--   1 ar114466 psacln       2856 Nov  3  2011 fcktemplates.xml
+-rw-r--r--   1 ar114466 psacln       2400 Nov  3  2011 fckutils.cfm

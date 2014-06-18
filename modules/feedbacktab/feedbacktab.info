@@ -1,0 +1,12 @@
+; $Id: feedbacktab.info,v 1.1 2009/04/20 12:05:18 bevan Exp $
+name = 'Feedback & Suggestions Tab'
+description = "Creates a tab by the scrollbar for feedback and suggestions."
+package = 'User Interface'
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-04-20
+version = "6.x-1.0-beta1"
+core = "6.x"
+project = "feedbacktab"
+datestamp = "1240229522"
+

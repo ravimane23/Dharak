@@ -1,0 +1,5 @@
+; $Id.
+name = Customization by Innoraft
+description = Make modifications in forms, node displays, views, etc
+core = 6.x
+package = Innoraft

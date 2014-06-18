@@ -1,0 +1,122 @@
+<?php
+/**
+ * @file
+ * Automatically converts any <a href="/user/login">Login</a> into a jQuery UI Dialog 
+ */
+ 
+/**
+ * Implementation of hook_perm().
+ */
+function jquad_perm(){
+  return array('administer configuration');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function jquad_menu() {
+  $include_path = drupal_get_path('module', 'jquad') . '/includes';
+	$menu = array(
+    'admin/settings/jquad' => array(
+      'title' => t('jQuery UI Account Dialogs'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('jquad_settings'),
+      'access arguments' => array('administer configuration'),
+      'description' => t('Configure various options available for jQuery UI Account Dialogs'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'admin.inc',
+      'file path' => $include_path,
+      
+    ),
+  	'ajax/jquad/form/%' => array(
+      'page callback' => 'jquad_get_form',
+      'page arguments' => array(3),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    ),
+  );
+  module_load_include('inc', 'jquad', 'includes/core');
+  $forms = jquad_allowed_forms();
+  foreach ($forms as $form_id => $menu_path) {
+    $menu[$menu_path . '/process'] = array(
+      'page callback' => 'jquad_process_form',
+      'page arguments' => array($form_id),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+  }
+  return $menu;
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function jquad_init() {
+  // Only load if jQuery UI is installed/enabled and if either login or logout links should be processed
+  if (module_exists('jquery_ui')) {
+    // Ensure that jQuery UI is at least 1.7.3+
+    $jquery_ui_version = jquery_ui_get_version();
+    if (version_compare($jquery_ui_version, '1.7.3', '>=')) {
+      if (variable_get('jquad_login', TRUE) || variable_get('jquad_logout', TRUE)) {
+        $module_path = drupal_get_path('module', 'jquad');
+        // Load module includes
+        module_load_include('inc', 'jquad', 'includes/core');
+        module_load_include('inc', 'jquad', 'includes/form');
+        module_load_include('inc', 'jquad', 'includes/theme');
+        // Determine if we should check for SSL pages
+        $ssl = module_exists('securepages');
+        // Generate internal, relative, absolute and if needed secure paths
+        $paths = array_merge(array(
+          'current' => $_GET['q'],
+          'getForm' => 'ajax/jquad/form',
+          'throbber' => theme('jquad_throbber'),
+        ), jquad_allowed_forms());
+        foreach ($paths as $key => $path) {
+          // Relative paths
+          $paths[$key] = array(
+            'path' => $path,
+            'relative' => url($path),
+          );
+          // Paths could be secure, check for SSL
+          if ($ssl) {
+            $paths[$key]['secure'] = (bool) securepages_match($path);
+            $paths[$key]['absolute'] = securepages_url($path, array('absolute' => TRUE, 'secure' => $paths[$key]['secure']));
+          }
+          // Paths do not use SSL
+          else {
+            $paths[$key]['secure'] = FALSE;
+            $paths[$key]['absolute'] = url($path, array('absolute' => TRUE));
+          }
+        }
+        // Load jQuery UI widgets
+        // @TODO: Add jQuery UI 1.8 support
+        jquery_ui_add(array('ui.dialog'));
+        // Load CSS files
+        drupal_add_css($module_path . '/css/jquad.css');
+        // Load JavaScript files
+        drupal_add_js('misc/jquery.form.js');
+        // Determine if MD5 should be should be used
+        $md5 = !(bool) jquad_md5_conflicts();
+        if (variable_get('jquad_md5', TRUE) && $md5) {
+          drupal_add_js($module_path . "/js/jquery.md5.js", 'module');
+        }
+        // Only load the jQuery AJAX XSS fix if module exists.
+        // http://friedcellcollective.net/outbreak/jsjquerywindownameplugin/
+        if ($ssl) {
+          drupal_add_js($module_path . "/js/jquery.windowName.plugin.js", 'module');
+        }
+        drupal_add_js($module_path . "/js/jquad.js", 'module');
+        drupal_add_js(array('jquad' => array(
+          'forms' => jquad_allowed_forms(),
+          'paths' => $paths,
+          'settings' => array(
+            'md5' => ((bool) variable_get('jquad_md5', TRUE) && $md5),
+          ),
+        )), 'setting');
+      }
+    }
+    else {
+      drupal_set_message(t('The jQuery UI library must be at least version 1.7.3 for the jQuery UI Account Dialogs module to function properly. Your current jQuery UI library version is %version.', array('%version' => $jquery_ui_version)), 'error');
+    }
+  }
+}

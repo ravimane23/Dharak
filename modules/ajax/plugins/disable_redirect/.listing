@@ -1,0 +1,7 @@
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x  12 ar114466 psacln       4096 Sep 20  2011 ..
+-rw-r--r--   1 ar114466 psacln        465 Sep 20  2011 README
+-rw-r--r--   1 ar114466 psacln        324 Sep 20  2011 ajax_disable_redirect.info
+-rw-r--r--   1 ar114466 psacln       1056 Sep 20  2011 ajax_disable_redirect.install
+-rw-r--r--   1 ar114466 psacln        779 Sep 20  2011 ajax_disable_redirect.js
+-rw-r--r--   1 ar114466 psacln        792 Sep 20  2011 ajax_disable_redirect.module

@@ -1,0 +1,11 @@
+drwxr-xr-x   4 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x  56 ar114466 psacln       4096 Nov 30  2011 ..
+-rw-r--r--   1 ar114466 psacln      14940 Sep 20  2011 LICENSE.txt
+-rw-r--r--   1 ar114466 psacln        714 Sep 20  2011 README.txt
+-rw-r--r--   1 ar114466 psacln      28475 Sep 20  2011 avatar_selection.admin.inc
+-rw-r--r--   1 ar114466 psacln        657 Sep 20  2011 avatar_selection.css
+-rw-r--r--   1 ar114466 psacln        390 Sep 20  2011 avatar_selection.info
+-rw-r--r--   1 ar114466 psacln       6616 Sep 20  2011 avatar_selection.install
+-rw-r--r--   1 ar114466 psacln      25212 Sep 20  2011 avatar_selection.module
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 js
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 translations

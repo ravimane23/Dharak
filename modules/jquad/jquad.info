@@ -1,0 +1,13 @@
+name = jQuery UI Account Dialogs
+description = Provides seamless integration of jQuery UI Dialogs for user registration, login, logout and password retrieval through out the site.
+package	= User interface
+dependencies[] = jquery_update
+dependencies[] = jquery_ui
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-04-23
+version = "6.x-1.0"
+core = "6.x"
+project = "jquad"
+datestamp = "1303523515"
+

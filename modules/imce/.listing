@@ -1,0 +1,11 @@
+drwxr-xr-x   6 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x  56 ar114466 psacln       4096 Nov 30  2011 ..
+-rw-r--r--   1 ar114466 psacln      14940 Sep 20  2011 LICENSE.txt
+-rw-r--r--   1 ar114466 psacln      10173 Sep 20  2011 README.txt
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 css
+-rw-r--r--   1 ar114466 psacln        268 Sep 20  2011 imce.info
+-rw-r--r--   1 ar114466 psacln       2916 Sep 20  2011 imce.install
+-rw-r--r--   1 ar114466 psacln       6014 Sep 20  2011 imce.module
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 inc
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 js
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 tpl

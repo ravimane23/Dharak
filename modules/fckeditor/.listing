@@ -1,0 +1,15 @@
+drwxr-xr-x   5 ar114466 psacln       4096 Nov  3  2011 .
+drwxr-xr-x  56 ar114466 psacln       4096 Nov 30  2011 ..
+drwxr-xr-x   3 ar114466 psacln       4096 Nov  3  2011 fckeditor
+-rw-r--r--   1 ar114466 psacln       5362 Nov  3  2011 fckeditor.config.js
+-rw-r--r--   1 ar114466 psacln        559 Nov  3  2011 fckeditor.css
+-rw-r--r--   1 ar114466 psacln        327 Nov  3  2011 fckeditor.info
+-rw-r--r--   1 ar114466 psacln      10109 Nov  3  2011 fckeditor.install
+-rw-r--r--   1 ar114466 psacln     114360 Nov  3  2011 fckeditor.module
+-rw-r--r--   1 ar114466 psacln       4418 Nov  3  2011 fckeditor.popup.html
+-rw-r--r--   1 ar114466 psacln        248 Nov  3  2011 fckeditor.popup.js
+-rw-r--r--   1 ar114466 psacln       9886 Nov  3  2011 fckeditor.utils.js
+-rw-r--r--   1 ar114466 psacln       3862 Nov  3  2011 filemanager.config.php
+-rw-r--r--   1 ar114466 psacln       3162 Nov  3  2011 img_assist_fckeditor.js
+drwxr-xr-x   7 ar114466 psacln       4096 Nov  3  2011 plugins
+drwxr-xr-x   2 ar114466 psacln       4096 Nov  3  2011 translations

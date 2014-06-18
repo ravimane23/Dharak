@@ -1,0 +1,218 @@
+<?php
+// $Id: innoraft.module,v 1.0 2011/06/21 10:00:0 mukesh.agarwal17 Exp $
+
+drupal_add_css(drupal_get_path('module', 'innoraft') .'/callout.css');
+drupal_add_js(drupal_get_path('module', 'innoraft') .'/jquery.callout.js');
+
+function innoraft_form_alter(&$form, &$form_state, $form_id) {
+     // print $form_id;
+    // echo "<pre>";
+    // print_r($form);
+    // echo "</pre>";
+  if(($form_id=="forum_node_form" || $form_id=="page_node_form" || $form_id=="story_node_form" || $form_id=="simplenews_node_form"))
+    $form['buttons']['submit']['#value'] = t("Submit");
+  if(($form_id=="comment_form" || $form_id=="user_register"))
+    $form['submit']['#value'] = t("Submit");	
+  
+  
+  switch($form_id) {
+  
+  
+    case 'user_register':
+      // print '<pre>'; print_r($form); print '</pre>';
+      $form['simplenews']['simplenews-90']['#default_value'] = 1;
+      $form['simplenews']['#access'] = FALSE;
+	  $form['submit']['#suffix']='If you have any problem with registration please send an email to admin@dentistrytoday.info';
+      break;
+	  
+	case 'privatemsg_new':
+      // print '<pre>'; print_r($form); print '</pre>';
+      unset($form['privatemsg']['format'][3]);
+      break;
+	  
+	  
+	case 'user_profile_form':
+      // print '<pre>'; print_r($form); print '</pre>';
+	  $form['signature_settings']['#weight'] = 20;
+	  unset($form['signature_settings']['signature_format'][3]);
+      break;
+	  
+	  
+    case 'comment_form':
+      // print '<pre>'; print_r($form); print '</pre>';
+      unset($form['_author']);
+      unset($form['comment_filter']['format'][3]);
+	  unset($form['comment_filter']['format'][4]);
+      $files = $form['attachments']['wrapper']['files'];
+      foreach ($files AS $key => $value) {
+        if (is_numeric($key) && is_array($value)) {
+          if (array_key_exists('remove', $value)) {
+            $form['attachments']['wrapper']['files'][$key]['remove']['#access'] = FALSE;
+          }
+          if (array_key_exists('list', $value)) {
+       	    $form['attachments']['wrapper']['files'][$key]['list']['#access']	= FALSE;
+       	  }
+          if (array_key_exists('weight', $value)) {
+       	    $form['attachments']['wrapper']['files'][$key]['weight']['#access']	= FALSE;
+       	  }
+          if (array_key_exists('size', $value)) {
+       	    $form['attachments']['wrapper']['files'][$key]['size']['#access']	= FALSE;
+       	  }
+        }
+      }
+      $title = db_result(db_query("SELECT title FROM {node} WHERE nid = %d", $form['nid']['#value']));
+	  $form['subject']['#maxlength'] = 128;
+      $form['subject']['#default_value'] = $title;
+	  
+      break;
+	  
+	  
+    case 'forum_node_form':
+      // print '<pre>'; print_r($form); print '</pre>';
+      unset($form['body_field']['format'][3]);
+	  unset($form['body_field']['teaser_include']);
+      $options = array();
+      $options[''] = '- None selected -';
+      $forums = taxonomy_get_tree(1);
+      $parents = array();
+      foreach ($forums as $forum) {
+      	$tid = $forum->tid;
+      	$name = $forum->name;
+      	$parent = $forum->parents[0];
+      	if ($parent == 0) {
+      	  $parents[$tid] = $name;
+      	}
+      	else {
+      	  $option = new stdClass();
+      	  $option->option = array($tid => $name . ' (' . $parents[$parent] . ')');
+      	  $options[] = $option;
+      	}
+      }
+      $form['taxonomy'][1]['#options'] = $options;
+      break;
+	  case 'search_form':
+	   // print '<pre>'; print_r($form); print '</pre>';
+      $options = array();
+      $options[''] = '- None selected -';
+      $forums = taxonomy_get_tree(1);
+	   // print '<pre>'; print_r($forums); print '</pre>';
+      $parents = array();
+      foreach ($forums as $forum) {
+      	$tid = $forum->tid;
+      	$name = $forum->name;
+      	$parent = $forum->parents[0];
+      	if ($parent == 0) {
+      	  $parents[$tid] = $name;
+      	}
+      	else {
+      	  $option = new stdClass();
+      	  $option->option = array($tid => $name . ' (' . $parents[$parent] . ')');
+      	  $options[] = $option;
+      	}
+      }
+      $form['advanced']['category']['#options']['Forums'] = $options;
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_block().
+ */     
+function innoraft_block($op = 'list', $delta = 0, $edit = array()) {
+  global $user;
+  if ($op == 'list') {
+    $blocks = array();
+  	$blocks[0] = array(
+      'info' => t('Top 5 Posts'),
+      'cache' => BLOCK_CACHE_GLOBAL,
+    );
+    $blocks[1] = array(
+      'info' => t('Top 6 to 15 Posts'),
+      'cache' => BLOCK_CACHE_GLOBAL,
+    );
+    $blocks[2] = array(
+      'info' => t('Top 16 to 25 Posts'),
+      'cache' => BLOCK_CACHE_GLOBAL,
+    );
+    $blocks[3] = array(
+      'info' => t('Top 26 to 35 Posts'),
+      'cache' => BLOCK_CACHE_GLOBAL,
+    );
+    return $blocks;
+  }   
+  else if ($op == 'view') {
+    $block = array();
+    switch ($delta) {
+      case 0:
+      	$block = array(
+          'subject' => t('Todays Active Posts (1 to 5)'),
+          'content' => _innoraft_active_posts(0, 5),
+        );
+        break;
+      case 1:
+      	$block = array(
+          'subject' => t('Todays Active Posts (6 to 15)'),
+          'content' => _innoraft_active_posts(5, 10),
+        );
+        break;
+      case 2:
+      	$block = array(
+          'subject' => t('Todays Active Posts (16 to 25)'),
+          'content' => _innoraft_active_posts(15, 10),
+        );
+        break;
+      case 3:
+      	$block = array(
+          'subject' => t('Todays Active Posts (26 to 35)'),
+          'content' => _innoraft_active_posts(25, 10),
+        );
+        break;
+    } 
+    return $block;
+  }     
+} 
+
+function _innoraft_active_posts($offset, $limit) {
+  $output = '';
+  $query = db_query("(
+        			SELECT 'node' AS type , node.nid AS id, node.nid AS node_id, node.title AS title, nr.teaser AS body, node.uid AS uid, node.created AS 
+timestamp
+    				FROM node AS node INNER JOIN node_revisions AS nr ON node.nid = nr.nid AND node.vid = nr.vid WHERE node.type = 'forum'
+    				)
+    				UNION 
+    				(
+    				SELECT 'comment' AS type, cid AS id, nid AS node_id, subject AS title, comment AS body, uid AS uid, timestamp AS timestamp
+    				FROM comments
+    				)
+    				ORDER BY timestamp DESC LIMIT %d,%d", $offset, $limit);
+  $output .= '<div class="views-content">';
+  while ($result = db_fetch_array($query)) {
+    $type = $result['type'];
+    if ($type == 'node') {
+      $nid = $result['node_id'];
+      $node = node_load($nid);
+      $output .= node_view($node, TRUE, FALSE, FALSE);
+      $output .= '<div class="clear-block"></div>';
+    }
+    else {
+      $output .= '<div class="node">';
+      $cid = $result['id'];
+      $nid = $result['node_id'];
+      $node = node_load($nid);
+      $account = user_load($result['uid']);
+      $output .= '<div class="user-picture">' . theme('author_pane_user_picture', $account, 'advanced_forum', '50x50') . '</div>';
+      $title = $result['title'];
+      $body = $result['body'];
+      $output .= '<span style="float: left; margin-right:5px; margin-top: 0;"><font color="#BDBDBD"><i>Topic: </i></font></span><h2 class="title">' . l($title, 'node/' . $nid, array('fragment' => 'comment-'. $cid)) . '</h2>';
+      $taxonomy =  taxonomy_link('taxonomy terms', $node);
+      $output .='<div class="meta meta-header"><div class="terms">';
+      $output .= '<span style="float: left; margin-right:5px; margin-top: 0;"><i>In Forum</i> </span>' . theme('links', $taxonomy, array('class' => 'links inline'));
+      $output .='</div></div>';
+	  $output .= '<div class="content"><p>' . strip_tags((substr($body, 0, 80)) , '<image></image>') . '</p><div class="meta meta-footer"> </div></div>';
+      $output .= '</div>';
+      $output .= '<div class="clear-block"></div>';
+    }
+  }
+  $output .= '</div>';
+  return $output;
+}

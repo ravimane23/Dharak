@@ -1,0 +1,6 @@
+drwxr-xr-x   2 ar114466 psacln       4096 Sep 20  2011 .
+drwxr-xr-x   3 ar114466 psacln       4096 Sep 20  2011 ..
+-rw-r--r--   1 ar114466 psacln        340 Sep 20  2011 README
+-rw-r--r--   1 ar114466 psacln       1547 Sep 20  2011 captcha.module.patch
+-rw-r--r--   1 ar114466 psacln        991 Sep 20  2011 image_captcha.module.patch
+-rw-r--r--   1 ar114466 psacln       1011 Sep 20  2011 text_captcha.module.patch
